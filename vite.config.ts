@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
@@ -8,20 +8,25 @@ export default defineConfig({
       entry: 'src/index.ts',
       name: 'TradeDocRendering',
       formats: ['es', 'umd'],
-      fileName: (format) => `trade-doc-rendering.${format}.js`,
+      fileName: (format) => `trade-doc-rendering.${format}.js`
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@mui/material', '@emotion/react', '@emotion/styled'],
+      external: [
+        'react', 
+        'react-dom', 
+        'react/jsx-runtime',
+        '@mui/material',
+        '@emotion/react',
+        '@emotion/styled'
+      ],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          '@mui/material': 'MaterialUI',
-          '@emotion/react': 'emotionReact',
-          '@emotion/styled': 'emotionStyled',
-        },
-      },
-    },
-  },
-});
-
+          'react/jsx-runtime': 'jsxRuntime',
+          '@mui/material': 'MaterialUI'
+        }
+      }
+    }
+  }
+})
