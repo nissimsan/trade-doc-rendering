@@ -2,12 +2,8 @@
 
 A TypeScript/React library for rendering trade documents (commercial invoices, bills of lading, certificates of origin, etc.) from JSON data.
 
-## Features
+![](/sample-doc.png)
 
-- **Simple & Generic** - Works with any trade document structure
-- **Automatic Layout** - Objects render as half-width boxes, arrays as full-width tables
-- **Print-Friendly** - Page breaks between sections, not through them
-- **No Configuration Needed** - Just pass your JSON document
 
 ## Installation
 
