@@ -1,0 +1,60 @@
+{
+  "name": "trade-doc-rendering",
+  "version": "1.0.0",
+  "description": "A TypeScript/React library for rendering trade documents (commercial invoices, bills of lading, etc.)",
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/trade-doc-rendering.git"
+  },
+  "keywords": [
+    "trade",
+    "documents",
+    "commercial-invoice",
+    "bill-of-lading",
+    "verifiable-credentials",
+    "react",
+    "mui",
+    "rendering"
+  ],
+  "main": "dist/trade-doc-rendering.umd.js",
+  "module": "dist/trade-doc-rendering.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/trade-doc-rendering.es.js",
+      "require": "./dist/trade-doc-rendering.umd.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --emitDeclarationOnly --declaration --outDir dist",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
+    "@mui/material": "^5.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.10",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.0"
+  }
+}

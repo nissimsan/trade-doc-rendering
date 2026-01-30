@@ -1,0 +1,120 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@protected": true,
+    "id": "@id",
+    "type": "@type",
+    
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "uncefact": "https://vocabulary.uncefact.org/",
+    "cred": "https://www.w3.org/2018/credentials#",
+    
+    "type": "@type",
+    "VerifiableCredential": "cred:VerifiableCredential",
+    "CommercialInvoice": "trade:CommercialInvoice",
+    
+    "validFrom": {
+      "@id": "cred:validFrom",
+      "@type": "xsd:dateTime"
+    },
+    "validTo": {
+      "@id": "cred:validTo", 
+      "@type": "xsd:dateTime"
+    },
+    "issuer": {
+      "@id": "cred:issuer",
+      "@type": "@id"
+    },
+    "credentialSubject": {
+      "@id": "cred:credentialSubject",
+      "@type": "@id"
+    },
+    "credentialSchema": "cred:credentialSchema",
+    
+    "Party": "schema:Organization",
+    "name": "schema:name",
+    "street": "schema:streetAddress",
+    "city": "schema:addressLocality", 
+    "state": "schema:addressRegion",
+    "zip": "schema:postalCode",
+    "country": "schema:addressCountry",
+    
+    "Buyer": "uncefact:BuyerTradeParty",
+    "Seller": "uncefact:SellerTradeParty", 
+    "Invoicee": "uncefact:InvoiceeTradeParty",
+    "Consignee": "uncefact:ConsigneeTradeParty",
+    "SellersBank": "uncefact:PayeePartyCreditorFinancialAccount",
+    
+    "purchaseOrderNumber": "uncefact:PurchaseOrderReferencedDocument",
+    "contractNumber": "uncefact:ContractReferencedDocument",
+    "invoiceNumber": "uncefact:ID",
+    "issueDate": {
+      "@id": "uncefact:IssueDateTime",
+      "@type": "xsd:date"
+    },
+    "invoiceDate": {
+      "@id": "uncefact:IssueDateTime", 
+      "@type": "xsd:date"
+    },
+    "paymentDueDate": {
+      "@id": "uncefact:DueDateDateTime",
+      "@type": "xsd:date"
+    },
+    "billOfLadingNumber": "uncefact:TransportDocumentID",
+    "letterOfCreditNumber": "uncefact:LetterOfCreditID",
+    "portOfEntry": "uncefact:EntryLocationID",
+    "unLocode": "uncefact:UNLOCODE",
+    "portName": "uncefact:LocationName",
+    "destinationCountry": "uncefact:destinationCountry",
+    
+    "buyer": "uncefact:BuyerTradeParty",
+    "seller": "uncefact:SellerTradeParty",
+    "invoicee": "uncefact:InvoiceeTradeParty",
+    "consignee": "uncefact:ConsigneeTradeParty",
+    "sellersBank": "uncefact:PayeePartyCreditorFinancialAccount",
+    "sellerBankAccountNumber": "uncefact:ProprietaryID",
+    
+    "originalLoadingLocation": "uncefact:OriginTradeCountry",
+    "originCountry": "uncefact:OriginTradeCountry",
+    "iataAirportCode": "uncefact:ID",
+    "unlocode": "uncefact:ID",
+    
+    "tradeTermsConditionsDescription": "uncefact:Description",
+    "tradeTermsConditionsCode": "uncefact:DeliveryTermsCode",
+    "paymentTerms": "uncefact:Description", 
+    "paymentMethod": "uncefact:TypeCode",
+    
+    "itemsShipped": "uncefact:IncludedSupplyChainTradeLineItem",
+    "product": "uncefact:SpecifiedTradeProduct",
+    "sku": "uncefact:ID",
+    "itemCount": {
+      "@id": "uncefact:BilledQuantity",
+      "@type": "xsd:decimal"
+    },
+    "description": "schema:description",
+    
+    "netWeight": "uncefact:NetWeightMeasure",
+    "grossWeight": "uncefact:GrossWeightMeasure", 
+    "productPrice": "uncefact:ChargeAmount",
+    "price": "uncefact:ChargeAmount",
+    "commodity": "uncefact:ClassificationID",
+    
+    "amount": {
+      "@id": "schema:value",
+      "@type": "xsd:decimal"
+    },
+    "unit": "schema:unitCode",
+    "currency": "schema:currency",
+    
+    "freightCost": "uncefact:FreightCharge",
+    "insuranceCost": "uncefact:InsuranceCharge",
+    "totalAmount": "uncefact:TotalPrepaidAmount",
+    
+    "MonetaryAmount": "schema:MonetaryAmount",
+    "Quantity": "schema:QuantitativeValue",
+    "Product": "schema:Product",
+    "TradeLineItem": "uncefact:SupplyChainTradeLineItem",
+    "Location": "schema:Place"
+  }
+}
