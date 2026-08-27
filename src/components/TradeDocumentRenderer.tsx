@@ -92,19 +92,36 @@ const FieldRow: React.FC<{ label: string; value: unknown }> = ({ label, value })
 /**
  * Renders an object as a section with field rows
  */
+// Inline postalAddress fields directly on the party for flat rendering.
+// The nested structure (Party → postalAddress → Address) is correct for linked
+// data but we present it flat on screen.
+function flattenForDisplay(data: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(data)) {
+    if (key === 'postalAddress' && value && typeof value === 'object' && !Array.isArray(value)) {
+      for (const [ak, av] of Object.entries(value as Record<string, unknown>)) {
+        if (ak !== 'type') out[ak] = av;
+      }
+    } else {
+      out[key] = value;
+    }
+  }
+  return out;
+}
+
 const ObjectSection: React.FC<{
   title: string;
   data: Record<string, unknown>;
   halfWidth?: boolean;
   isRightColumn?: boolean;
 }> = ({ title, data, halfWidth = true, isRightColumn = false }) => {
-  // Get display title from 'type' field if it exists, otherwise use the key
   const displayTitle = (data.type as string) || formatFieldLabel(title);
-  
+  const displayData = flattenForDisplay(data);
+
   return (
     <SectionBox title={displayTitle} halfWidth={halfWidth} isRightColumn={isRightColumn}>
-      {Object.entries(data)
-        .filter(([key]) => key !== 'type') // Don't show 'type' as a field since it's in the title
+      {Object.entries(displayData)
+        .filter(([key]) => key !== 'type')
         .map(([key, value]) => (
           <FieldRow key={key} label={formatFieldLabel(key)} value={value} />
         ))}
