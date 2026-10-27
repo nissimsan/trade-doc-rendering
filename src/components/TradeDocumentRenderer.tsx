@@ -140,6 +140,10 @@ function flattenObject(obj: Record<string, unknown>): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   
   for (const [key, value] of Object.entries(obj)) {
+    // Types are class names (Product, TradeLineItem, Discount); like everywhere else in the
+    // rendering they are not shown, so tables get no "Type" column
+    if (key === 'type') continue;
+
     if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
       // Check if it's a "leaf" object (like { amount, currency } or { amount, unit })
       const objValue = value as Record<string, unknown>;
