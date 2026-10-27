@@ -22,23 +22,38 @@ export interface SimpleCategorizedFields {
 }
 
 /**
- * Extract document title from type array
+ * Convert a PascalCase type name to readable words, e.g. CommercialInvoice -> Commercial Invoice
+ */
+function typeToWords(type: string): string {
+  return type
+    .replace(/([A-Z])/g, ' $1')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
+/**
+ * Extract the document title, in order of preference:
+ * 1. the credential's `name` (W3C VC 2.0)
+ * 2. the credential subject's `type`, e.g. CommercialInvoice
+ * 3. the most specific credential type, without a trailing "Credential"
  */
 export function extractDocumentTitle(document: TradeDocument): string {
-  if (!document.type || !Array.isArray(document.type)) {
-    return 'Trade Document';
+  if (typeof document.name === 'string' && document.name.trim()) {
+    return document.name.trim();
   }
-  
-  // Find the most specific type (not VerifiableCredential)
-  const specificType = document.type.find(t => t !== 'VerifiableCredential');
-  if (specificType) {
-    // Convert camelCase or PascalCase to readable format
-    return specificType
-      .replace(/([A-Z])/g, ' $1')
-      .trim()
-      .replace(/\s+/g, ' ');
+
+  const subjectType = document.credentialSubject?.type;
+  if (typeof subjectType === 'string' && subjectType) {
+    return typeToWords(subjectType);
   }
-  
+
+  if (Array.isArray(document.type)) {
+    const specificType = document.type.find(t => t !== 'VerifiableCredential');
+    if (specificType) {
+      return typeToWords(specificType.replace(/Credential$/, '') || specificType);
+    }
+  }
+
   return 'Trade Document';
 }
 
@@ -93,11 +108,15 @@ export function categorizeFieldsSimple(document: TradeDocument): SimpleCategoriz
   if (document.issuer) {
     result.verification.issuer = document.issuer;
   }
+  // Labelled with the W3C VC 2.0 names: validFrom is when the credential takes effect, which is
+  // not necessarily when it was issued
   if (document.validFrom) {
-    result.verification.issuanceDate = document.validFrom;
+    result.verification.validFrom = document.validFrom;
   }
-  if (document.validTo) {
-    result.verification.expirationDate = document.validTo;
+  // validTo is kept for credentials predating VC 2.0
+  const validUntil = document.validUntil ?? document.validTo;
+  if (validUntil) {
+    result.verification.validUntil = validUntil;
   }
 
   // Process credential subject - iterate in document order
@@ -111,6 +130,11 @@ export function categorizeFieldsSimple(document: TradeDocument): SimpleCategoriz
     const value = subject[key];
     
     if (value === undefined || value === null) {
+      continue;
+    }
+
+    // The subject's type identifies the document and is shown as the title, not as a claim
+    if (key === 'type') {
       continue;
     }
 

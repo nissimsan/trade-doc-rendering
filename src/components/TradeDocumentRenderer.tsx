@@ -115,7 +115,9 @@ const ObjectSection: React.FC<{
   halfWidth?: boolean;
   isRightColumn?: boolean;
 }> = ({ title, data, halfWidth = true, isRightColumn = false }) => {
-  const displayTitle = (data.type as string) || formatFieldLabel(title);
+  // Head the section with the field's name (e.g. Subtotal, Buyer); the object's type is a class
+  // name such as MonetaryAmount or Party, which says nothing about its role in the document
+  const displayTitle = formatFieldLabel(title);
   const displayData = flattenForDisplay(data);
 
   return (

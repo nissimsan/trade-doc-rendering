@@ -89,7 +89,12 @@ export interface TradeDocument {
   type?: string[];
   credentialSchema?: CredentialSchema;
   id?: string;
+  /** Human-readable name of the credential (W3C VC 2.0) */
+  name?: string;
   validFrom?: string;
+  /** Expiry (W3C VC 2.0) */
+  validUntil?: string;
+  /** Expiry in credentials predating VC 2.0 */
   validTo?: string;
   issuer?: string;
   credentialSubject?: TradeDocumentSubject;
@@ -100,6 +105,8 @@ export interface TradeDocument {
  * The credential subject containing the actual trade document data
  */
 export interface TradeDocumentSubject {
+  /** Type of the business document, e.g. CommercialInvoice */
+  type?: string;
   purchaseOrderNumber?: string;
   contractNumber?: string;
   invoiceNumber?: string;

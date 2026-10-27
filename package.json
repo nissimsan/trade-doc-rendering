@@ -1,12 +1,12 @@
 {
   "name": "trade-doc-rendering",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A TypeScript/React library for rendering trade documents (commercial invoices, bills of lading, etc.)",
   "author": "Your Name",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/trade-doc-rendering.git"
+    "url": "https://github.com/nissimsan/trade-doc-rendering.git"
   },
   "keywords": [
     "trade",
